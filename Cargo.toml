@@ -1,0 +1,9 @@
+[package]
+name = "LandscapeGeneration"
+version = "0.1.0"
+authors = ["Egor Ivkov <e.o.ivkov@gmail.com>"]
+
+[dependencies]
+rand = "0.5.5"
+nalgebra = "0.16.0"
+image = "*"
