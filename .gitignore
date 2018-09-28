@@ -1,2 +1,4 @@
 /target
 **/*.rs.bk
+.idea/vcs.xml
+heightmap_*.png
