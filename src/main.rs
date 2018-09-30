@@ -3,15 +3,19 @@ extern crate nalgebra as na;
 extern crate image;
 extern crate ndarray;
 
+pub mod agents;
+pub mod posutils;
+
 use image::ImageBuffer;
 use rand::Rng;
 use na::{Matrix4, Vector4, DMatrix};
 use ndarray::Array2;
+use agents::generate_landscape;
 
 fn main() {
-    let size = 522;
+    let size = 100;
     let lattice_n = 10;
-    let m = bilinear_interpolation(size as usize, lattice_n, 255);
+    /*let m = bilinear_interpolation(size as usize, lattice_n, 255);
     let img = ImageBuffer::from_fn((size - size/lattice_n) as u32, (size - size/lattice_n) as u32, |x, y| {
         image::Luma([m[(x as usize,y as usize)] as u8])
     });
@@ -20,7 +24,12 @@ fn main() {
     let img = ImageBuffer::from_fn((size - size/lattice_n) as u32, (size - size/lattice_n) as u32, |x, y| {
         image::Luma([((m[[x as usize,y as usize]]/2f64 + 0.5f64) * 255f64) as u8])
     });
-    img.save("heightmap_2.png").unwrap();
+    img.save("heightmap_2.png").unwrap();*/
+    let m = generate_landscape(size, 100, 1, size*size/2, size*size/500);
+    let img = ImageBuffer::from_fn(size as u32, size as u32, |x, y| {
+        image::Luma([m[[x as usize,y as usize]] as u8])
+    });
+    img.save("heightmap_3.png").unwrap();
 }
 
 fn gradient_interpolation(size: usize, lattice_n: usize) -> Array2<f64> {
